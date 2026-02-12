@@ -35,13 +35,14 @@ if st.button("생성하기🔥"):
         result = chat_completion.choices[0].message.content
         st.write(result)
 
-    with st.spinner("이미지 생성 중입니다."):
+    with st.spinner('이미지 생성 중입니다.'):
         response = client.images.generate(
             model="dall-e-3",
-            prompt="제품 홍보를 위한 이미지 생성: " + keyword,
+            prompt=keyword,
             size="1024x1024",
-            n=1,
+            n=1
         )
 
+        result = chat_completion.choices[0].message.content
         image_url = response.data[0].url
         st.image(image_url)
