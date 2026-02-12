@@ -37,16 +37,11 @@ if st.button("생성하기🔥"):
 
     with st.spinner("이미지 생성 중입니다."):
         response = client.images.generate(
-            model="gpt-image-1",
+            model="dall-e-3",
             prompt="제품 홍보를 위한 이미지 생성: " + keyword,
             size="1024x1024",
             n=1,
         )
 
-        # ✅ gpt-image-1은 url이 아니라 b64_json으로 받는다
-        image_base64 = response.data[0].b64_json
-        image_bytes = base64.b64decode(image_base64)
-
-        # Streamlit에 표시 (PIL Image로 변환)
-        image = Image.open(BytesIO(image_bytes))
-        st.image(image, caption=f"키워드: {keyword}", use_container_width=True)
+        image_url = response.data[0].url
+        st.image(image_url)
